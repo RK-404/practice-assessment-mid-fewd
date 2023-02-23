@@ -15,14 +15,19 @@ const exampleRecords = require("./records");
  *
  * NOTE: You must use the `.map()` method.
  */
-function getAllRecordTitles() {}
+function getAllRecordTitles(records) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  return records.map(record => record.title);
+}
 
 /**
  * checkIfAnyRecordHasGenre()
  * -----------------------------
  * Returns a boolean, representing whether or not any of the records includes the provided genre. If the inputted `records` array is empty, throw an error with a message.
  * @param {Object[]} records - An array of records. See the `records.js` file for an example of this array.
- * @param {string} - A genre.
+ * @param {string} genre - A genre.
  * @returns {boolean|Error} Returns `true` if any record exists in the list with the given genre, otherwise returns `false`.
  *
  * NOTE: You must use the `.some()` method.
@@ -35,7 +40,12 @@ function getAllRecordTitles() {}
  *  checkIfAnyRecordHasGenre(records, "marching band");
  *  //> false
  */
-function checkIfAnyRecordHasGenre() {}
+function checkIfAnyRecordHasGenre(records, genre) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  return records.some(record => record.genres.includes(genre));
+}
 
 /**
  * findByTitle()
@@ -48,7 +58,13 @@ function checkIfAnyRecordHasGenre() {}
  *
  * NOTE: You must use the `.find()` method.
  */
-function findByTitle() {}
+function findByTitle(records, id) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  let recordId =  records.find(record => record.title.toLowerCase() === id.toLowerCase());
+  return !recordId ? null : recordId;
+}
 
 /**
  * getAllRecordsLongerThanNumberOfSeconds()
@@ -66,7 +82,33 @@ function findByTitle() {}
  * The .split() method will be useful for this.
  * NOTE: You must use the `.filter()` method.
  */
-function getAllRecordsLongerThanNumberOfSeconds() {}
+function getAllRecordsLongerThanNumberOfSeconds(records, lengthInSeconds) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  return records.filter(record => {
+    let lengthArr = record.length.split(":");
+    return Number(lengthArr[0] * 60) + Number(lengthArr[1]) > lengthInSeconds;
+  });
+}
+
+/**
+ * filterByLabel()
+ * -----------------------------
+ * Returns all record objects with a matching label. Case-insensitive. If the inputted `records` array is empty, throw an error with a message. If no records match the inputted `label`, return `[]`.
+ * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
+ * @param {string} label - The label of a record. (e.g. "Capitol")
+ * @returns {Object[]|Error} An array of records where at least one of the labels matches the `label` inputted.
+ *
+ * NOTE: You must use the `.filter()` method.
+ * 
+ */
+function filterByLabel(records, label) {
+  if (!records.length){
+    throw "No records found!"
+  }
+  return records.filter(record => record.label === label);
+}
 
 /**
  * checkMinYear()
@@ -85,7 +127,12 @@ function getAllRecordsLongerThanNumberOfSeconds() {}
  *  checkMinYear(records, 1865));
  *  //>  true
  */
-function checkMinYear() {}
+function checkMinYear(records, year = 1900) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  return records.every(record => record.year >= year);
+}
 
 /**
  * getArtistAndTitleObjects()
@@ -121,7 +168,14 @@ function checkMinYear() {}
       {"Alanis Morissette": "Jagged Little Pill"},
       {"The Beatles": "Rubber Soul"}]
  */
-function getArtistAndTitleObjects() {}
+function getArtistAndTitleObjects(records) {
+  if (!records.length) {
+    throw "No record found!"
+  }
+  return records.map(record => {
+    return {[record.artist] : record.title};
+  });
+}
 
 // Do not change anything below this line.
 module.exports = {
@@ -129,7 +183,7 @@ module.exports = {
   checkIfAnyRecordHasGenre,
   findByTitle,
   getAllRecordsLongerThanNumberOfSeconds,
+  filterByLabel,
   checkMinYear,
-  getAllRecordsLongerThanNumberOfSeconds,
   getArtistAndTitleObjects,
 };
