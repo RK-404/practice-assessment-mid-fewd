@@ -82,15 +82,15 @@ function findByTitle(records, id) {
  * The .split() method will be useful for this.
  * NOTE: You must use the `.filter()` method.
  */
-function getAllRecordsLongerThanNumberOfSeconds(records, lengthInSeconds) {
-  if (!records.length) {
-    throw "No record found!"
-  }
-  return records.filter(record => {
-    let lengthArr = record.length.split(":");
-    return Number(lengthArr[0]) * 60 + Number(lengthArr[1]) > lengthInSeconds;
-  });
-}
+// function getAllRecordsLongerThanNumberOfSeconds(records, lengthInSeconds) {
+//   if (!records.length) {
+//     throw "No record found!"
+//   }
+//   return records.filter(record => {
+//     let lengthArr = record.length.split(":");
+//     return Number(lengthArr[0]) * 60 + Number(lengthArr[1]) > lengthInSeconds;
+//   });
+// }
 
 /**
  * filterByLabel()
@@ -177,12 +177,34 @@ function getArtistAndTitleObjects(records) {
   });
 }
 
+// alt solution from Denny's:
+//* function getArtistAndTitleObjects(records) {
+//   if (!records.length) {
+//     throw "No record found!";
+//   }
+//   return records.map(record => {
+//     let obj = {}
+//     obj [record.artist] = record.title
+//     return obj
+//   })
+// }
+
+// alt solution from MD:
+// function getArtistAndTitleObjects(records) {
+//   if (!records.length) {
+//     throw "No record found!";
+//   }
+// return records.map(record => {
+// return {[record.artist] : record.title}
+// })
+// }
+
 // Do not change anything below this line.
 module.exports = {
   getAllRecordTitles,
   checkIfAnyRecordHasGenre,
   findByTitle,
-  getAllRecordsLongerThanNumberOfSeconds,
+  //getAllRecordsLongerThanNumberOfSeconds,
   filterByLabel,
   checkMinYear,
   getArtistAndTitleObjects,
