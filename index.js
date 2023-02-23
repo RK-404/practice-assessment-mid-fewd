@@ -88,7 +88,7 @@ function getAllRecordsLongerThanNumberOfSeconds(records, lengthInSeconds) {
   }
   return records.filter(record => {
     let lengthArr = record.length.split(":");
-    return Number(lengthArr[0] * 60) + Number(lengthArr[1]) > lengthInSeconds;
+    return Number(lengthArr[0]) * 60 + Number(lengthArr[1]) > lengthInSeconds;
   });
 }
 
@@ -170,7 +170,7 @@ function checkMinYear(records, year = 1900) {
  */
 function getArtistAndTitleObjects(records) {
   if (!records.length) {
-    throw "No record found!"
+    throw "No record found!";
   }
   return records.map(record => {
     return {[record.artist] : record.title};
