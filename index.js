@@ -177,6 +177,28 @@ function getArtistAndTitleObjects(records) {
   });
 }
 
+// alt solution from Denny's:
+//* function getArtistAndTitleObjects(records) {
+//   if (!records.length) {
+//     throw "No record found!";
+//   }
+//   return records.map(record => {
+//     let obj = {}
+//     obj [record.artist] = record.title
+//     return obj
+//   })
+// }
+
+// alt solution from MD:
+// function getArtistAndTitleObjects(records) {
+//   if (!records.length) {
+//     throw "No record found!";
+//   }
+// return records.map(record => {
+// return {[record.artist] : record.title}
+// })
+// }
+
 // Do not change anything below this line.
 module.exports = {
   getAllRecordTitles,
